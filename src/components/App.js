@@ -25,8 +25,13 @@ greasedHogs = () => {
   let originalHogs = this.state.hogs
   if (this.state.greasedHogs === false) {
     if (this.state.search === "name") {
-      originalHogs.sort()
-      console.log(originalHogs)
+      console.log('success')
+      let sortedNameHogs = originalHogs.sort((a, b) => a.name < b.name ? -1 : 1)
+      return sortedNameHogs
+    } else if (this.state.search === "weight") {
+      console.log("success again")
+      let sortedWeightHogs = originalHogs.sort((a, b) => a.weight < b.weight ? -1 : 1)
+      return sortedWeightHogs
     }
     return originalHogs
   } else if (this.state.greasedHogs === true) {
@@ -52,8 +57,6 @@ setSearch = e => {
   this.setState( {
     search: e.target.value,
   }, () => console.log(this.state.search))
-  console.log(e.target.value)
-  console.log(this.state.search)
 }
 
 sortByName = () => {
@@ -70,8 +73,6 @@ sortByName = () => {
         <Nav />
         <button onClick={this.handleFilter}>Greased Pigs</button>
         {this.renderSelectMenu()}
-        {/* <button onClick={this.sortByName}>Sort By Name</button>
-        <button>Sort By Weight</button> */}
         <Index hogs={this.greasedHogs()}/>
       </div>
     );
